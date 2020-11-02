@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+
+    <div class="col-12">
+      <h1 class="welcome-header"> Welcome to Grandmas Cook Book!</h1>
+      <ul class="list-group"></ul>
+      {% for ingred in ingred_list %}
+      <li class="list-group-item">{{ingred}}</li>
+      {% endfor %}
+      </ul>
+    </div>
+
+
+  </div>
+</div>
+
+{% endblock %}
