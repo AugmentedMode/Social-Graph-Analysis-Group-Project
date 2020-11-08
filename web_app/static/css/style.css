@@ -1,0 +1,54 @@
+html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  /* background-color: #181a1f; */
+
+  background: linear-gradient(to bottom, #808080 0%, #000000 58%);
+}
+
+
+  
+  #myInput {
+    background-image: url('../images/search_bar.png');
+    background-size: 20px 20px;
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+  }
+  
+  #myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #myUL li a {
+    border: 1px solid #ddd;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block
+  }
+  
+  #myUL li a:hover:not(.header) {
+    background-color: #eee;
+  }
+  
+  .search-table {
+    height:700px;
+  }
+  .search-table {
+    overflow:hidden;
+    overflow-y:scroll;
+  }

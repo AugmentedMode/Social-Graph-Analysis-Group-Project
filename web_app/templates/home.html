@@ -3,32 +3,42 @@
 {% block body %}
 <div class="container">
   <div class="row">
-      <!--Navbar-->
-      <nav class="navbar navbar-dark default-color">
-  <form class="form-inline">
-    <div class="md-form my-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-    </div>
-    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
-  </form>
-</nav>
-
-<br>
-
-
-
 
     <div class="col-12">
-      <h1 class="welcome-header"> Welcome to Grandmas Cook Book!</h1>
-      <ul class="list-group"></ul>
-      {% for ingred in ingred_list %}
-      <li class="list-group-item">{{ingred}}</li>
-      {% endfor %}
-      </ul>
-    </div>
+      <div class="text-center">
+        <h1 class="welcome-header"> Welcome to Grandmas Cook Book!</h1>
+      </div>
+      
+      <input type="text" id="myInput" onkeyup="searchFriends()" placeholder="Search for ingredients.." title="Type in a name">
 
+         <ul class="search-table" id="myUL">
+           {% for ingred in ingred_list %}
+              <li class="list-group-item"><a href="{{ url_for('model',ingedient = ingred)}}">{{ingred}}</a></li>
+           {% endfor %}
+         </ul>
+    </div>
 
   </div>
 </div>
+
+<script>
+  function searchFriends() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+</script>
 
 {% endblock %}

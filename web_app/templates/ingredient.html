@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+
+    <div class="col-12">
+      <div class="text-center">
+        <h1 class="welcome-header"> <a href="{{ url_for('home')}}", style="color:black">Similar Ingedients to: {{ingedient}}</a></h1>
+      </div>
+      <ul class="search-table" id="myUL">
+        {% for ingred in recommended_ingredients %}
+           <li class="list-group-item"><a href="{{ url_for('model',ingedient = ingred)}}">{{ingred}}</a></li>
+        {% endfor %}
+      </ul>
+      
+
+    </div>
+
+  </div>
+</div>
+
+
+
+{% endblock %}
