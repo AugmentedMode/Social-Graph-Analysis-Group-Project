@@ -9,7 +9,7 @@
         <h1 class="welcome-header"> Welcome to Grandmas Cook Book!</h1>
       </div>
       
-      <input type="text" id="myInput" onkeyup="searchFriends()" placeholder="Search for ingredients.." title="Type in a name">
+      <input type="text" id="myInput" onkeyup="searchIngredients()" placeholder="Search for ingredients.." title="Type in a name">
 
          <ul class="search-table" id="myUL">
            {% for ingred in ingred_list %}
@@ -21,8 +21,8 @@
   </div>
 </div>
 
-<script>
-  function searchFriends() {
+<!-- <script>
+  function searchIngredients() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
