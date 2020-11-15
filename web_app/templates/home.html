@@ -16,12 +16,25 @@
               <li class="list-group-item"><a href="{{ url_for('model',ingedient = ingred)}}">{{ingred}}</a></li>
            {% endfor %}
          </ul>
+
+          #need this to be cuisine
+         <input type="text" id="myInput" onkeyup="searchIngredients()" placeholder="Search for ingredients.." title="Type in a name">
+         <ul class="search-table" id="myUL">
+          {% for ingred in ingred_list %}
+             <li class="list-group-item"><a href="{{ url_for('model',ingedient = ingred)}}">{{ingred}}</a></li>
+          {% endfor %}
+          </ul>
     </div>
 
   </div>
 </div>
 
-<!-- <script>
+<p>Filter by cuisine: <input type="string" id="cuisine" value=""></p>
+<button onclick="filterCuisine()">Filter</button>
+
+<p>Returned ingredients by cuisine: <span id="demo"></span></p>
+
+<script>
   function searchIngredients() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("myInput");
@@ -38,6 +51,16 @@
         }
     }
 }
+
+  //what filters through df
+  function filterCheck(cuisine) {
+    return cuisine == document.getElementById("cuisine").value;
+  }
+  
+  function filterCuisine(){
+    document.getElementById("demo").innerHTML = ages.filter(checkAdult);
+  }
+
 
 </script>
 
