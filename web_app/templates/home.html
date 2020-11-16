@@ -13,7 +13,7 @@
 
          <ul class="search-table" id="myUL">
            {% for ingred in ingred_list %}
-              <li class="list-group-item"><a href="{{ url_for('model',ingedient = ingred)}}">{{ingred}}</a></li>
+              <li class="list-group-item"><a href="{{ url_for('model',ingedient = ingred)}}">{{ingred}} {{cook_book[ingred]}}</a></li>
            {% endfor %}
          </ul>
 

@@ -4,11 +4,15 @@ import pickle
 
 app = Flask(__name__)
 
+with open('static/models/ingred_list.pkl', 'rb') as f:
+        ingred_list = pickle.load(f)
+
+with open('static/models/cook_book.pkl', 'rb') as f:
+    cook_book = pickle.load(f)
+
 @app.route('/')
 def home():
-    with open('static/models/ingred_list.pkl', 'rb') as f:
-        ingred_list = pickle.load(f)
-    return render_template('home.html', ingred_list=ingred_list)
+    return render_template('home.html', ingred_list=ingred_list, cook_book=cook_book)
 
 
 @app.route('/api/<string:ingedient>')
