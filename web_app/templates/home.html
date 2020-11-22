@@ -8,11 +8,12 @@
       <div class="text-center">
         <h1 class="welcome-header"> Welcome to Grandmas Cook Book!</h1>
       </div>
-      
-      <input type="text" id="myInput" onkeyup="searchIngredients()" placeholder="Search for ingredients.." title="Type in a name">
+
+      <input type="text" id="myInput" onkeyup="searchIngredients()" placeholder="Search for ingredients.."
+        title="Type in a name">
 
 
-      
+
       <div id="myBtnContainer">
         <button class="btn active" onclick="filterSelection('all')"> Show all</button>
         {% for cuisine in cuisines %}
@@ -22,28 +23,20 @@
 
       <br>
 
-         <ul class="search-table" id="myUL">
-           {% for ingred in ingred_list %}
-           {% set ingredloop = ingred %}
-           {% set ns = namespace(tags="") %}
-                {% for key, value in cook_book_v2['lettuc'].items() %}
-                  {% set ns.tags = ns.tags + key + " " %}
-                  
-                {% endfor %}
-                
-                
+      <ul class="search-table" id="myUL">
+        {% for ingred in ingred_list %}
+        <li class="list-group-item"><a style="display: inline-block; " href="{{ url_for('model',ingedient = ingred)}}">{{ingred}} </a>
+          <ul style="display: inline-block; float: right; position: relative; padding-top: 5px;" class="cuisine_list">
+            {% for item in cook_book_v2[ingred] %}
+              {% if loop.index <= 5 %}
               
-                <li class="list-group-item"><a href="{{ url_for('model',ingedient = ingred)}}">{{ingred}} {{cook_book_v2[ingred]}} {{ns.tags}}</a></li>
+              <li class="btn btn-outline-info">{{item}}</li>
+              {% endif %}
             {% endfor %}
-         </ul>
-
-          #need this to be cuisine
-         <input type="text" id="myInput" onkeyup="searchIngredients()" placeholder="Search for ingredients.." title="Type in a name">
-         <ul class="search-table" id="myUL">
-          {% for ingred in ingred_list %}
-             <li class="list-group-item"><a href="{{ url_for('model',ingedient = ingred)}}">{{ingred}}</a></li>
-          {% endfor %}
-          </ul>
+          </ul>    
+        </li>
+        {% endfor %}
+      </ul>
     </div>
 
   </div>
@@ -62,69 +55,70 @@
     ul = document.getElementById("myUL");
     li = ul.getElementsByTagName("li");
     for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
+      a = li[i].getElementsByTagName("a")[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
     }
-}
+
+  }
 
   //what filters through df
   function filterCheck(cuisine) {
     return cuisine == document.getElementById("cuisine").value;
   }
-  
-  function filterCuisine(){
+
+  function filterCuisine() {
     document.getElementById("demo").innerHTML = ages.filter(checkAdult);
   }
 
 
 
   filterSelection("all")
-function filterSelection(c) {
-  var x, i;
-  x = document.getElementsByClassName("filterDiv");
-  if (c == "all") c = "";
-  for (i = 0; i < x.length; i++) {
-    w3RemoveClass(x[i], "show");
-    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-  }
-}
-
-function w3AddClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
-  }
-}
-
-function w3RemoveClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    while (arr1.indexOf(arr2[i]) > -1) {
-      arr1.splice(arr1.indexOf(arr2[i]), 1);     
+  function filterSelection(c) {
+    var x, i;
+    x = document.getElementsByClassName("filterDiv");
+    if (c == "all") c = "";
+    for (i = 0; i < x.length; i++) {
+      w3RemoveClass(x[i], "show");
+      if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
     }
   }
-  element.className = arr1.join(" ");
-}
 
-// Add active class to the current button (highlight it)
-var btnContainer = document.getElementById("myBtnContainer");
-var btns = btnContainer.getElementsByClassName("btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function(){
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
-}
+  function w3AddClass(element, name) {
+    var i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (i = 0; i < arr2.length; i++) {
+      if (arr1.indexOf(arr2[i]) == -1) { element.className += " " + arr2[i]; }
+    }
+  }
+
+  function w3RemoveClass(element, name) {
+    var i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (i = 0; i < arr2.length; i++) {
+      while (arr1.indexOf(arr2[i]) > -1) {
+        arr1.splice(arr1.indexOf(arr2[i]), 1);
+      }
+    }
+    element.className = arr1.join(" ");
+  }
+
+  // Add active class to the current button (highlight it)
+  var btnContainer = document.getElementById("myBtnContainer");
+  var btns = btnContainer.getElementsByClassName("btn");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function () {
+      var current = document.getElementsByClassName("active");
+      current[0].className = current[0].className.replace(" active", "");
+      this.className += " active";
+    });
+  }
 </script>
 
 {% endblock %}
