@@ -24,8 +24,17 @@
 
          <ul class="search-table" id="myUL">
            {% for ingred in ingred_list %}
-              <li class="list-group-item"><a href="{{ url_for('model',ingedient = ingred)}}">{{ingred}} {{cook_book_v2[ingred]}}</a></li>
-           {% endfor %}
+           {% set ingredloop = ingred %}
+           {% set ns = namespace(tags="") %}
+                {% for key, value in cook_book_v2['lettuc'].items() %}
+                  {% set ns.tags = ns.tags + key + " " %}
+                  
+                {% endfor %}
+                
+                
+              
+                <li class="list-group-item"><a href="{{ url_for('model',ingedient = ingred)}}">{{ingred}} {{cook_book_v2[ingred]}} {{ns.tags}}</a></li>
+            {% endfor %}
          </ul>
 
           #need this to be cuisine
