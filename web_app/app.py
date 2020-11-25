@@ -1,21 +1,32 @@
 from flask import Flask, render_template, request, flash, session, redirect, url_for
 import gensim
 import pickle
+import json
 
 app = Flask(__name__)
 
 with open('static/models/ingred_list.pkl', 'rb') as f:
         ingred_list = pickle.load(f)
 
+with open('static/models/ingred_list_v2.pkl', 'rb') as f:
+        ingred_list = pickle.load(f)
+
 with open('static/models/cook_book_v2.pkl', 'rb') as f:
     cook_book_v2 = pickle.load(f)
+
+with open('static/models/cook_book_v3.pkl', 'rb') as f:
+    cook_book_v3 = pickle.load(f)
 
 with open('static/models/cuisine_obj.pkl', 'rb') as f:
     cuisines = pickle.load(f)
 
 @app.route('/')
 def home():
-    return render_template('home.html', ingred_list=ingred_list, cook_book_v2=cook_book_v2, cuisines=cuisines)
+    print(cook_book_v3['grill chicken breast'])
+    cook_book_json=json.dumps(cook_book_v3)
+    cook_book_json = json.loads(cook_book_json)
+    print(cook_book_json['grill chicken breast'])
+    return render_template('home.html', ingred_list=ingred_list, cook_book_v2=cook_book_v3, cuisines=cuisines, cook_book_json=cook_book_json)
 
 
 @app.route('/api/<string:ingedient>')

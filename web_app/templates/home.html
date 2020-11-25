@@ -15,19 +15,20 @@
 
 
       <div id="myBtnContainer">
-        <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+        <button class="btn active" onclick="filterSelectionTest({{cook_book_json}}, 'all')"> Show all</button>
         {% for cuisine in cuisines %}
-        <button class="btn" onclick="filterSelection('{{cuisine}}')"> {{cuisine}}</button>
+        <button class="btn" onclick="filterSelectionTest({{cook_book_json}}, '{{cuisine}}')"> {{cuisine}}</button>
         {% endfor %}
       </div>
 
       <br>
 
       <ul class="search-table" id="myUL">
-        {% for ingred in ingred_list %}
-        <li class="list-group-item"><a style="display: inline-block; " href="{{ url_for('model',ingedient = ingred)}}">{{ingred}} </a>
+        
+        {% for key, value in cook_book_v2.items() %}
+        <li class="list-group-item ingredItem" id='{{key}}'><a style="display: inline-block; " href="{{ url_for('model',ingedient = key)}}">{{key}}</a>
           <ul style="display: inline-block; float: right; position: relative; padding-top: 5px;" class="cuisine_list">
-            {% for item in cook_book_v2[ingred] %}
+            {% for item in cook_book_v2[key] %}
               {% if loop.index <= 5 %}
               
               <li class="btn btn-outline-info">{{item}}</li>
@@ -43,20 +44,67 @@
 </div>
 
 <script>
+
+    function filterSelectionTest(cook_book_json, c) {
+      var x, i;
+      
+      if (c != 'all') {
+        console.log(cook_book_json);
+        for (var key in cook_book_json){
+          var attrName = key;
+          console.log(key)
+          attrName = attrName.trim()
+          var attrValue = cook_book_json[key];
+          if(attrValue.hasOwnProperty(c)){
+            console.log(attrName);
+            console.log(attrValue)
+            var x = document.getElementById(attrName);
+            console.log(x)
+            
+              x.style.display = "";
+            
+            
+              // show this attrname // list item
+          }  else {
+            var x = document.getElementById(attrName);
+            
+            x.style.display = "none";
+            
+            // hide
+          }
+      }
+      } else {
+        for (var key in cook_book_json){
+          var attrName = key;
+          var x = document.getElementById(attrName);
+          x.style.display = "";
+        //console.log(c)
+        //show all 
+      }
+    }
+    }
+    //filterSelectionTest({{ cook_book_json|safe }}, c)
+
+
   function searchIngredients() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
     ul = document.getElementById("myUL");
-    li = ul.getElementsByTagName("li");
+    li = ul.getElementsByClassName("ingredItem");
     for (i = 0; i < li.length; i++) {
       a = li[i].getElementsByTagName("a")[0];
       txtValue = a.textContent || a.innerText;
+      
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        //if (li[i].style.display == "") {
         li[i].style.display = "";
+        
       } else {
         li[i].style.display = "none";
+        
       }
+      
     }
 
   }

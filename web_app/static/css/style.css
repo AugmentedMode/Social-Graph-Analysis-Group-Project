@@ -74,6 +74,7 @@ body {
 
   }
   
+  /*
   .filterDiv {
   float: left;
   background-color: #2196F3;
@@ -84,7 +85,7 @@ body {
   margin: 2px;
   display: none;
 }
-
+*/
 .show {
   display: block;
 }
