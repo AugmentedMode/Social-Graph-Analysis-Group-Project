@@ -14,10 +14,10 @@
 
 
 
-      <div id="myBtnContainer">
-        <button class="btn active" onclick="filterSelectionTest({{cook_book_json}}, 'all')"> Show all</button>
+      <div id="myBtnContainer" class="text-center">
+        <button style="margin-top: 10px;" class="btn active btn-outline-dark" onclick="filterSelectionTest({{cook_book_json}}, 'all')"> Show all</button>
         {% for cuisine in cuisines %}
-        <button class="btn" onclick="filterSelectionTest({{cook_book_json}}, '{{cuisine}}')"> {{cuisine}}</button>
+        <button style="margin-top: 10px;" class="btn btn-outline-dark" onclick="filterSelectionTest({{cook_book_json}}, '{{cuisine}}')"> {{cuisine}}</button>
         {% endfor %}
       </div>
 
@@ -30,7 +30,6 @@
           <ul style="display: inline-block; float: right; position: relative; padding-top: 5px;" class="cuisine_list">
             {% for item in cook_book_v2[key] %}
               {% if loop.index <= 5 %}
-              
               <li class="btn btn-outline-info">{{item}}</li>
               {% endif %}
             {% endfor %}
