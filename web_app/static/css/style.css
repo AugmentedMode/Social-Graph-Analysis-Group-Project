@@ -4,10 +4,24 @@ html{
     padding: 0;
 }
 
-body {
-  /* background-color: #181a1f; */
+.welcome-header{
+  padding: 30px;
+  text-align: center;
+  background-color: rgba(255,255,255,0.5);
+  color: black;
+  font-size: 45px;
+}
 
-  background: linear-gradient(to bottom, #808080 0%, #000000 58%);
+
+body {
+  background-image: url('../images/produce_bg.jpg');
+  width: 1200px;
+  height: 600px;
+  background-size: cover;   
+  background-repeat: no repeat;
+  margin: auto;
+  padding:0;
+  top: 25px; 
 }
 
 
@@ -30,10 +44,11 @@ body {
     margin: 0;
   }
   
+
   #myUL li a {
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     margin-top: -1px; /* Prevent double borders */
-    background-color: #f6f6f6;
+    /* background-color: #f6f6f6; */
     padding: 12px;
     text-decoration: none;
     font-size: 18px;
@@ -42,13 +57,55 @@ body {
   }
   
   #myUL li a:hover:not(.header) {
-    background-color: #eee;
+    /* background-color: #eee; */
   }
   
   .search-table {
-    height:700px;
+    height:500px;
   }
   .search-table {
     overflow:hidden;
     overflow-y:scroll;
   }
+
+
+  .cuisine_list {
+    list-style: none;
+
+  }
+  
+  /*
+  .filterDiv {
+  float: left;
+  background-color: #2196F3;
+  color: #ffffff;
+  width: 100px;
+  line-height: 100px;
+  text-align: center;
+  margin: 2px;
+  display: none;
+}
+*/
+.show {
+  display: block;
+}
+
+.container {
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+
+/* Style the buttons */
+.btn {
+  /* border: none; */
+  /* outline: none; */
+  padding: 8px 12px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.btn.active {
+  background-color: #2196F3;
+  color: white;
+}
